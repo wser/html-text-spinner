@@ -69,13 +69,15 @@
         this.tick();
         this.isDeleting = false;
       };
+        
+      var i = Math.floor(Math.random() * this.toRotate.length);
 
+      var fillText = this.toRotate[i];
+      
       TxtRotate.prototype.tick = function () {
         // var i = this.loopNum % this.toRotate.length;   
-        var i = Math.floor(Math.random() * this.toRotate.length);
 
-        var fullTxt = this.toRotate[i] + '.';
-        //var fullTxt = randItem + '.';
+        var fullTxt =  fillText + '.';
 
         if (this.isDeleting) {
           this.txt = fullTxt.substring(0, this.txt.length - 1);
