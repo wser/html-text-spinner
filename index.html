@@ -28,7 +28,6 @@
     </style>
   </head>
   <body>
-
     <!-- TYPE LETTERS -->
     <h1>
       I'm
@@ -63,23 +62,30 @@
       var TxtRotate = function (el, toRotate, period) {
         this.toRotate = toRotate;
         this.el = el;
-        this.loopNum = 0;
+        this.loopNum = Math.floor(Math.random() * this.toRotate.length) || 0;
         this.period = parseInt(period, 10) || 2000;
         this.txt = '';
         this.tick();
         this.isDeleting = false;
       };
-        
-      
-      
+
+      function randomNoRepeats(array) {
+        var copy = array.slice(0); //make shallow copy of array
+        return function () {
+          if (copy.length < 1) copy = array.slice(0); // if all items in array are exhausted, repeat from start
+          var index = Math.floor(Math.random() * copy.length); //item index
+          var item = copy[index]; //item value
+          copy.splice(index, 1); //remove one item from array
+          return index; //return index || item
+        };
+      }
+
       TxtRotate.prototype.tick = function () {
-        // var i = this.loopNum % this.toRotate.length;   
+        var choosen = randomNoRepeats(this.toRotate);
 
-        var i = Math.floor(Math.random() * this.toRotate.length);
+        var i = this.loopNum % this.toRotate.length;
 
-        var fillText = this.toRotate[i];
-
-        var fullTxt =  fillText + '.';
+        var fullTxt = this.toRotate[i] + '.';
 
         if (this.isDeleting) {
           this.txt = fullTxt.substring(0, this.txt.length - 1);
@@ -99,7 +105,7 @@
           this.isDeleting = true;
         } else if (this.isDeleting && this.txt === '') {
           this.isDeleting = false;
-          this.loopNum++;
+          this.loopNum = choosen();
           delta = 500;
         }
 
