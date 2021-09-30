@@ -81,7 +81,7 @@
       }
 
       TxtRotate.prototype.tick = function () {
-        var choosen = randomNoRepeats(this.toRotate);
+        var chosen = randomNoRepeats(this.toRotate);
 
         var i = this.loopNum % this.toRotate.length;
 
@@ -105,7 +105,7 @@
           this.isDeleting = true;
         } else if (this.isDeleting && this.txt === '') {
           this.isDeleting = false;
-          this.loopNum = choosen();
+          this.loopNum = chosen();
           delta = 500;
         }
 
