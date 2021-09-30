@@ -72,7 +72,12 @@
 
       TxtRotate.prototype.tick = function () {
         var i = this.loopNum % this.toRotate.length;
-        var fullTxt = this.toRotate[i] + '.';
+
+        var randItem = this.toRotate[Math.floor(Math.random() * this.toRotate.length)];
+
+
+        // var fullTxt = this.toRotate[i] + '.';
+        var fullTxt = randItem + '.';
 
         if (this.isDeleting) {
           this.txt = fullTxt.substring(0, this.txt.length - 1);
@@ -85,9 +90,7 @@
         var that = this;
         var delta = 300 - Math.random() * 100;
 
-        if (this.isDeleting) {
-          delta /= 2;
-        }
+        if (this.isDeleting) delta /= 2;
 
         if (!this.isDeleting && this.txt === fullTxt) {
           delta = this.period;
